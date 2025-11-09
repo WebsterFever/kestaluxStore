@@ -22,7 +22,7 @@
       skin: 'All',
       popularity: 150,
       desc: 'Comfort matte that lasts all day.',
-      img: 'https://i.ibb.co/4RWq7Ry7/liti.jpg'
+      img: 'https://i.ibb.co/wNrGX3Dn/Chat-GPT-Image-Nov-9-2025-11-59-49-AM.png'
     },
     {
       id: 'e1',
