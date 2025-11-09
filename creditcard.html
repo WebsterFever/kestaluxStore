@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kestalux — Secure Checkout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body {
+      background: var(--mint);
+      font-family: Inter, sans-serif;
+    }
+
+    .checkout-container {
+      max-width: 480px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--leaf);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      font-size: 15px;
+      width: 100%;
+    }
+
+    .card-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--leaf), var(--leaf-2));
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: var(--leaf-2);
+      transform: translateY(-2px);
+    }
+
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 12px 0 22px;
+    }
+
+    .payment-icons img {
+      width: 42px;
+      height: auto;
+      opacity: 0.85;
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      color: var(--leaf);
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      color: var(--leaf);
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <h2>Secure Checkout</h2>
+    <div class="payment-icons">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+    </div>
+
+    <form id="paymentForm">
+      <div>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Jane Doe" required>
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+      </div>
+
+      <div>
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required>
+      </div>
+
+      <div class="card-row">
+        <div style="flex:2;">
+          <label for="expDate">Expiry Date</label>
+          <input type="text" id="expDate" maxlength="5" placeholder="MM/YY" required>
+        </div>
+        <div style="flex:1;">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" maxlength="3" placeholder="123" required>
+        </div>
+      </div>
+
+      <div>
+        <label for="method">Payment Method</label>
+        <select id="method">
+          <option value="card">Credit/Debit Card</option>
+          <option value="paypal">PayPal</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary">Pay Now</button>
+    </form>
+
+    <div class="success-message" id="successMsg">
+      ✅ Payment successful! Thank you for shopping with Kestalux 💚
+    </div>
+
+    <a href="index.html" class="back-link">← Back to shop</a>
+  </div>
+
+  <script>
+    // Show subtotal from cart
+    const total = localStorage.getItem('kestalux_checkout_total') || 0;
+    const payButton = document.querySelector('.btn-primary');
+    payButton.textContent = `Pay ${Number(total).toLocaleString(undefined, {style:'currency', currency:'USD'})}`;
+
+    const form = document.getElementById('paymentForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simulate fake "processing" animation
+      const button = form.querySelector('button');
+      button.disabled = true;
+      button.textContent = 'Processing...';
+
+      setTimeout(() => {
+        button.style.display = 'none';
+        form.reset();
+        successMsg.style.display = 'block';
+
+        // Clear local storage after payment
+        localStorage.removeItem('kestalux_checkout_total');
+
+        // Redirect back after 3 seconds
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 3000);
+      }, 1500);
+    });
+
+    // Format card input
+    const cardNumber = document.getElementById('cardNumber');
+    cardNumber.addEventListener('input', (e) => {
+      e.target.value = e.target.value
+        .replace(/\D/g, '')
+        .replace(/(.{4})/g, '$1 ')
+        .trim();
+    });
+
+    const expDate = document.getElementById('expDate');
+    expDate.addEventListener('input', (e) => {
+      e.target.value = e.target.value
+        .replace(/\D/g, '')
+        .replace(/(\d{2})(\d{0,2})/, '$1/$2')
+        .trim();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kestalux Cosmetics — Shop All</title>
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+  <div class="container header-inner">
+    <!-- Logo + brand -->
+    <a class="brand" href="#" aria-label="Kestalux Home">
+      <img src="assets/logo.png" alt="Kestalux logo" class="logo" />
+      <span class="brand-name">Kestalux</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navMenu">
+      <a href="#hero">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Search + Cart + Menu for mobile -->
+    <div class="header-actions">
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <button id="searchIcon" class="search-toggle" aria-label="Search">🔍</button>
+      <button id="cartButton" class="cart-button" aria-label="Open cart">
+        🧺<span id="cartCount" class="cart-count">0</span>
+      </button>
+    </div>
+
+    <!-- Search bar (hidden by default) -->
+    <div class="search-area" id="searchArea">
+      <input id="searchInput" type="search" placeholder="Search products…" aria-label="Search products"/>
+    </div>
+  </div>
+</header>
+
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <img src="assets/kestaluxBanner.png" alt="Exclusive Kestalux — Keep Yourself Beautiful" class="hero-img"/>
+   
+    <div class="hero-overlay">
+      <a href="#shop" class="btn btn-primary">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- Shop Controls -->
+  <section id="shop" class="shop container">
+    <header class="shop-header">
+      <h2>Shop All</h2>
+      <p class="muted">Explore foundations, lipsticks, eyeshadows, serums, and more.</p>
+    </header>
+    <div class="toolbar">
+      <select id="categoryFilter" aria-label="Filter by category">
+        <option value="all">All Categories</option>
+      </select>
+      <select id="skinFilter" aria-label="Filter by skin type">
+        <option value="all">All Skin Types</option>
+        <option value="Dry">Dry</option>
+        <option value="Oily">Oily</option>
+        <option value="Combination">Combination</option>
+        <option value="Sensitive">Sensitive</option>
+      </select>
+      <div class="price-wrap">
+        <label for="priceRange">Max $<span id="priceVal">100</span></label>
+        <input id="priceRange" type="range" min="5" max="100" value="100" step="5" />
+      </div>
+      <select id="sortSelect" aria-label="Sort products">
+        <option value="popularity">Sort: Popularity</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="name-asc">Name: A → Z</option>
+        <option value="name-desc">Name: Z → A</option>
+      </select>
+      <button id="clearFiltersBtn" class="btn">Clear</button>
+    </div>
+
+    <section id="productGrid" class="product-grid" aria-live="polite"></section>
+  </section>
+
+  
+
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" aria-labelledby="cartTitle" role="dialog">
+    <!-- ✅ Added tabindex for accessibility -->
+    <div class="cart-panel" tabindex="-1">
+      <header class="cart-header">
+        <h2 id="cartTitle">Your Cart</h2>
+        <button id="closeCartBtn" class="icon-btn" aria-label="Close cart">✕</button>
+      </header>
+      <div id="cartItems" class="cart-items"></div>
+      <footer class="cart-footer">
+        <div class="totals">
+          <div><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+          <small class="muted">Taxes & shipping calculated at checkout.</small>
+        </div>
+        <button id="checkoutBtn" class="btn btn-primary">Checkout</button>
+      </footer>
+    </div>
+    <div id="backdrop" class="backdrop" tabindex="-1" aria-hidden="true"></div>
+  </aside>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="productModalTitle">
+    <div class="modal-panel">
+      <header class="modal-header">
+        <h3 id="productModalTitle">Product</h3>
+        <button id="closeModalBtn" class="icon-btn" aria-label="Close">✕</button>
+      </header>
+      <div class="modal-body">
+        <img id="modalImage" alt="" />
+        <div class="modal-info">
+          <p id="modalDesc"></p>
+          <div class="price-line">
+            <span id="modalPrice" class="price"></span>
+            <button id="modalAddBtn" class="btn btn-primary">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Template -->
+  <template id="productCardTpl">
+    <article class="card" tabindex="0">
+      <div class="thumb"></div>
+      <div class="card-body">
+        <h3 class="title"></h3>
+        <p class="desc"></p>
+        <div class="meta">
+          <span class="price"></span>
+          <button class="btn add-to-cart">Add</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Contact Section -->
+    <div id="contact" class="footer-column">
+      <h4>CONTACT</h4>
+      <p>Email: <a href="mailto:hello@kestalux.com">hello@kestalux.com</a></p>
+      <p>Customer Service: Mon–Fri, 9AM–6PM</p>
+      <button class="footer-btn">CONTACT US</button>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="footer-column">
+      <h4>ABOUT</h4>
+      <p>Clean, cruelty-free beauty crafted to enhance your natural glow.</p>
+      <button class="footer-btn">LEARN MORE</button>
+    </div>
+
+    <!-- Company Section -->
+    <div class="footer-column">
+      <h4>COMPANY</h4>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+
+    <!-- Help Section -->
+    <div class="footer-column">
+      <h4>HELP & INFORMATION</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Ordering & Payment</a>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <!-- Brand Section -->
+    <div class="footer-column">
+      <h4>KESTALUX</h4>
+      <a href="#">Journal</a>
+      <a href="#">Careers</a>
+      <div class="social-icons">
+        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© <span id="year"></span> Kestalux Cosmetics — All Rights Reserved</p>
+  </div>
+</footer>
+
+
+
+  <!-- ✅ Load the App script AFTER DOM is ready -->
+  <script src="app.js"></script>
+  <script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const searchIcon = document.getElementById("searchIcon");
+  const searchArea = document.getElementById("searchArea");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
+
+  searchIcon.addEventListener("click", () => {
+    searchArea.classList.toggle("active");
+  });
+</script>
+
+
+</body>
+</html>
