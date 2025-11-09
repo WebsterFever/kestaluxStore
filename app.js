@@ -6,8 +6,8 @@
   const products = [
     {
       id: 'f1',
-      name: 'Silk Glow Foundation',
-      price: 28,
+      name: 'Radiance Face Cream',
+      price: 28.80,
       category: 'Foundation',
       skin: 'Dry',
       popularity: 120,
@@ -16,8 +16,8 @@
     },
     {
       id: 'l1',
-      name: 'Velvet Matte Lipstick',
-      price: 16,
+      name: 'Gentle Foaming Cleanser',
+      price: 16.65,
       category: 'Lipstick',
       skin: 'All',
       popularity: 150,
@@ -26,8 +26,8 @@
     },
     {
       id: 'e1',
-      name: 'Nude Eyeshadow Palette',
-      price: 24,
+      name: 'Glow C Serum',
+      price: 24.70,
       category: 'Eyeshadow',
       skin: 'All',
       popularity: 110,
@@ -37,7 +37,7 @@
     {
       id: 's1',
       name: 'Radiance Serum',
-      price: 30,
+      price: 30.90,
       category: 'Serum',
       skin: 'Combination',
       popularity: 140,
@@ -47,7 +47,7 @@
     {
       id: 'c1',
       name: 'Balance Face Cream',
-      price: 22,
+      price: 22.65,
       category: 'Face Cream',
       skin: 'Oily',
       popularity: 95,
@@ -57,7 +57,7 @@
     {
       id: 'f2',
       name: 'Pure Mineral Foundation',
-      price: 26,
+      price: 26.70,
       category: 'Foundation',
       skin: 'Sensitive',
       popularity: 85,
@@ -67,7 +67,7 @@
     {
       id: 'm1',
       name: 'Luminous Mist Setting Spray',
-      price: 18,
+      price: 18.40,
       category: 'Setting Spray',
       skin: 'All',
       popularity: 90,
@@ -77,7 +77,7 @@
     {
       id: 'b1',
       name: 'Rose Bliss Body Lotion',
-      price: 20,
+      price: 20.80,
       category: 'Body Care',
       skin: 'Dry',
       popularity: 100,
