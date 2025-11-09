@@ -1744,7 +1744,7 @@ button.remove:hover {
   padding: 6px;
   border: 1.5px solid #c6d9c6; /* delicate, high-end border */
   box-shadow: 0 4px 10px rgba(47, 122, 68, 0.08); /* soft green tint shadow */
-  filter: brightness(1.15) saturate(1.1); /* 🌿 makes green a bit lighter */
+  
   transition: all 0.3s ease;
 }
 
@@ -1785,4 +1785,156 @@ button.remove:hover {
 
 .logo:hover {
   transform: scale(1.05);    /* keep a subtle hover polish */
+}
+
+
+/* =========================
+   Kestalux Cosmetics — Header & Logo
+   ========================= */
+
+:root {
+  --mint: #e9f7e9;
+  --leaf: #2f7a44;
+  --leaf-2: #6aa06b;
+  --gold: #a9b33e;
+  --line: #e6efe6;
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== GLOBAL ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1b1f1a;
+  background: var(--mint);
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(233, 247, 233, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  gap: 16px;
+}
+
+/* ===== BRAND ===== */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== LOGO ===== */
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;         /* 🟢 Circle shape */
+  object-fit: cover;          /* keeps the full logo in proportion */
+  border: none;               /* 🟢 remove all borders */
+  background: transparent;    /* 🟢 clean background */
+  box-shadow: none;           /* 🟢 remove any shadow */
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);     /* subtle hover effect */
+}
+
+/* ===== BRAND NAME ===== */
+.brand-name {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  color: var(--leaf);
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav a {
+  color: var(--leaf);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 17px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav a:hover {
+  color: var(--leaf-2);
+  transform: translateY(-1px);
+}
+
+/* ===== SEARCH ===== */
+.search-area {
+  flex: 1;
+}
+
+.search-area input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 10px 16px;
+  }
+
+  .brand-name {
+    display: none;
+  }
+
+  .logo {
+    width: 55px;
+    height: 55px;
+  }
+}
+.logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20%;
+  
+  filter: brightness(1.25) saturate(1.2); /* keeps it bright and vivid */
+  box-shadow: 0 6px 16px rgba(47, 122, 68, 0.18); /* keeps hover shadow always */
+  transition: none; /* disables hover animation */
+  transform: scale(1.05); /* keeps hover scale always active */
+}
+.logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20%;
+
+  padding: 6px;
+  filter: brightness(1.25) saturate(1.2);
+  box-shadow: 0 6px 16px rgba(47, 122, 68, 0.18);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.07);
+  filter: brightness(1.35) saturate(1.3);
 }

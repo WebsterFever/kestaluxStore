@@ -12,7 +12,7 @@
       skin: 'Dry',
       popularity: 120,
       desc: 'Hydrating medium coverage with dewy finish.',
-      img: 'https://i.ibb.co/hRWN40yd/loto.jpg' // ✅ Local image
+      img: 'https://i.ibb.co/nNfwTDmt/Chat-GPT-Image-Nov-9-2025-04-23-15-PM.png' // ✅ Local image
     },
     {
       id: 'l1',
