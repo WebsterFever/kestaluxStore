@@ -1761,7 +1761,7 @@ button.remove:hover {
   background-color: #084635; /* your provided deep green */
   padding: 6px;
   border: 1.5px solid #b8c9b8; /* light mint border for contrast */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ box-shadow: 0 6px 16px rgba(47, 122, 68, 0.18);
   filter: brightness(1.05) saturate(1.15);
   transition: all 0.3s ease;
 }
@@ -1770,4 +1770,19 @@ button.remove:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(8, 70, 53, 0.25);
   filter: brightness(1.15) saturate(1.2);
+}
+.logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border: none;              /* 🟢 remove border */
+  border-radius: 0;          /* 🟢 remove rounded corners */
+  background: transparent;   /* 🟢 no background color */
+  box-shadow: 0 6px 16px rgba(47, 122, 68, 0.18);        /* 🟢 remove shadow */
+  padding: 0;                /* 🟢 remove spacing */
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);    /* keep a subtle hover polish */
 }
