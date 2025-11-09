@@ -1,6 +1,6 @@
 (() => {
-  const $ = (sel, el=document) => el.querySelector(sel);
-  const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+  const $ = (sel, el = document) => el.querySelector(sel);
+  const $$ = (sel, el = document) => Array.from(el.querySelectorAll(sel));
 
   // ===== PRODUCTS =====
   const products = [
@@ -12,7 +12,7 @@
       skin: 'Dry',
       popularity: 120,
       desc: 'Hydrating medium coverage with dewy finish.',
-      img: 'https://www.exquisitecosmetics.co.uk/media/catalog/product/cache/ad6e42b6c992a2cf94dc96be40620e3c/m/u/mua_velvet_matte_lipstick_6_shades.png'
+      img: 'https://i.ibb.co/hRWN40yd/loto.jpg' // ✅ Local image
     },
     {
       id: 'l1',
@@ -22,7 +22,7 @@
       skin: 'All',
       popularity: 150,
       desc: 'Comfort matte that lasts all day.',
-      img: 'https://images.beautybay.com/eoaaqxyywn6o/MUAM0184F_1.jpg_s3.lmb_tjn9fb/5cbbcf245fd4c6b550f1b515289ad601/MUAM0184F_1.jpg'
+      img: 'https://i.ibb.co/4RWq7Ry7/liti.jpg'
     },
     {
       id: 'e1',
@@ -32,7 +32,7 @@
       skin: 'All',
       popularity: 110,
       desc: '9-pan neutrals with buttery mattes.',
-      img: 'https://goldenrose.co.za/cdn/shop/files/40.png?v=1726733961'
+      img: 'https://i.ibb.co/N63wGMtT/lotion.jpg'
     },
     {
       id: 's1',
@@ -65,31 +65,30 @@
       img: 'https://png.pngtree.com/png-vector/20241213/ourmid/pngtree-pink-floral-lipstick-packaging-png-image_14723876.png'
     },
     {
-  id: 'm1',
-  name: 'Luminous Mist Setting Spray',
-  price: 18,
-  category: 'Setting Spray',
-  skin: 'All',
-  popularity: 90,
-  desc: 'Locks in makeup with a radiant, dewy glow that lasts all day.',
-  img: 'https://w7.pngwing.com/pngs/302/877/png-transparent-sk-ii-cream-facial-beauty-sh2-eye-cream-cosmetology-service-people.png'
-},
-{
-  id: 'b1',
-  name: 'Rose Bliss Body Lotion',
-  price: 20,
-  category: 'Body Care',
-  skin: 'Dry',
-  popularity: 100,
-  desc: 'Nourishing lotion infused with rose oil for silky, hydrated skin.',
-  img: 'https://w7.pngwing.com/pngs/787/10/png-transparent-makeup-brush-cosmetics-eye-liner-eye-shadow-lipstick-miscellaneous-microphone-face-thumbnail.png'
-}
-
+      id: 'm1',
+      name: 'Luminous Mist Setting Spray',
+      price: 18,
+      category: 'Setting Spray',
+      skin: 'All',
+      popularity: 90,
+      desc: 'Locks in makeup with a radiant, dewy glow that lasts all day.',
+      img: 'https://w7.pngwing.com/pngs/302/877/png-transparent-sk-ii-cream-facial-beauty-sh2-eye-cream-cosmetology-service-people.png'
+    },
+    {
+      id: 'b1',
+      name: 'Rose Bliss Body Lotion',
+      price: 20,
+      category: 'Body Care',
+      skin: 'Dry',
+      popularity: 100,
+      desc: 'Nourishing lotion infused with rose oil for silky, hydrated skin.',
+      img: 'https://w7.pngwing.com/pngs/787/10/png-transparent-makeup-brush-cosmetics-eye-liner-eye-shadow-lipstick-miscellaneous-microphone-face-thumbnail.png'
+    }
   ];
 
   const state = {
     cart: loadCart(),
-    filters: { text:'', category:'all', skin:'all', sort:'popularity', maxPrice:100 }
+    filters: { text: '', category: 'all', skin: 'all', sort: 'popularity', maxPrice: 100 }
   };
 
   // ===== ELEMENTS =====
@@ -112,7 +111,7 @@
   const year = $('#year');
 
   // ===== INIT =====
-  function init(){
+  function init() {
     year.textContent = new Date().getFullYear();
 
     // Populate categories
@@ -124,7 +123,7 @@
       categoryFilter.appendChild(opt);
     });
 
-    // Events
+    // Filters
     searchInput.addEventListener('input', e => { state.filters.text = e.target.value.toLowerCase().trim(); renderProducts(); });
     categoryFilter.addEventListener('change', e => { state.filters.category = e.target.value; renderProducts(); });
     skinFilter.addEventListener('change', e => { state.filters.skin = e.target.value; renderProducts(); });
@@ -135,8 +134,13 @@
     });
     sortSelect.addEventListener('change', e => { state.filters.sort = e.target.value; renderProducts(); });
     clearFiltersBtn.addEventListener('click', () => {
-      state.filters = { text:'', category:'all', skin:'all', sort:'popularity', maxPrice:100 };
-      searchInput.value = ''; categoryFilter.value = 'all'; skinFilter.value = 'all'; priceRange.value = 100; priceVal.textContent = '100'; sortSelect.value = 'popularity';
+      state.filters = { text: '', category: 'all', skin: 'all', sort: 'popularity', maxPrice: 100 };
+      searchInput.value = '';
+      categoryFilter.value = 'all';
+      skinFilter.value = 'all';
+      priceRange.value = 100;
+      priceVal.textContent = '100';
+      sortSelect.value = 'popularity';
       renderProducts();
     });
 
@@ -150,23 +154,23 @@
   }
 
   // ===== PRODUCT GRID =====
-  function renderProducts(){
+  function renderProducts() {
     grid.innerHTML = '';
     let list = products.slice();
 
-    // Filters
+    // Apply filters
     if (state.filters.category !== 'all') list = list.filter(p => p.category === state.filters.category);
     if (state.filters.skin !== 'all') list = list.filter(p => p.skin === state.filters.skin || p.skin === 'All');
     if (state.filters.text) list = list.filter(p => (p.name + ' ' + p.desc).toLowerCase().includes(state.filters.text));
     list = list.filter(p => p.price <= state.filters.maxPrice);
 
     // Sort
-    switch(state.filters.sort){
-      case 'price-asc': list.sort((a,b)=>a.price-b.price); break;
-      case 'price-desc': list.sort((a,b)=>b.price-a.price); break;
-      case 'name-asc': list.sort((a,b)=>a.name.localeCompare(b.name)); break;
-      case 'name-desc': list.sort((a,b)=>b.name.localeCompare(a.name)); break;
-      default: list.sort((a,b)=>b.popularity-a.popularity);
+    switch (state.filters.sort) {
+      case 'price-asc': list.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': list.sort((a, b) => b.price - a.price); break;
+      case 'name-asc': list.sort((a, b) => a.name.localeCompare(b.name)); break;
+      case 'name-desc': list.sort((a, b) => b.name.localeCompare(a.name)); break;
+      default: list.sort((a, b) => b.popularity - a.popularity);
     }
 
     if (!list.length) {
@@ -183,8 +187,13 @@
       const price = $('.price', card);
       const btn = $('.add-to-cart', card);
 
-      // ✅ Display real image
-      thumb.innerHTML = `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`;
+      // ✅ Render image (local or remote)
+      thumb.innerHTML = `
+        <img src="${p.img}" 
+             alt="${p.name}" 
+             onerror="this.src='assets/placeholder.png';" 
+             style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+      `;
 
       title.textContent = p.name;
       desc.textContent = p.desc;
@@ -198,33 +207,33 @@
   }
 
   // ===== MODAL =====
-  function openProductModal(p){
+  function openProductModal(p) {
     const modal = $('#productModal');
     $('#productModalTitle').textContent = p.name;
     $('#modalDesc').textContent = `${p.desc} • Category: ${p.category} • Skin: ${p.skin}`;
     $('#modalPrice').textContent = formatCurrency(p.price);
-    $('#modalImage').src = p.img; // ✅ show image
+    $('#modalImage').src = p.img;
     $('#modalAddBtn').onclick = () => addToCart(p.id);
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     $('#closeModalBtn').onclick = closeModal;
-    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   }
 
-  function closeModal(){
+  function closeModal() {
     const modal = $('#productModal');
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
   }
 
   // ===== CART =====
-  function loadCart(){ try { return JSON.parse(localStorage.getItem('kestalux_cart') || '{}'); } catch { return {}; } }
-  function saveCart(){ localStorage.setItem('kestalux_cart', JSON.stringify(state.cart)); }
-  function addToCart(id, qty=1){ state.cart[id]=(state.cart[id]||0)+qty; saveCart(); renderCart(); openCart(); }
-  function removeFromCart(id){ delete state.cart[id]; saveCart(); renderCart(); }
-  function setQty(id, qty){ if(qty<=0){ removeFromCart(id); return; } state.cart[id]=qty; saveCart(); renderCart(); }
+  function loadCart() { try { return JSON.parse(localStorage.getItem('kestalux_cart') || '{}'); } catch { return {}; } }
+  function saveCart() { localStorage.setItem('kestalux_cart', JSON.stringify(state.cart)); }
+  function addToCart(id, qty = 1) { state.cart[id] = (state.cart[id] || 0) + qty; saveCart(); renderCart(); openCart(); }
+  function removeFromCart(id) { delete state.cart[id]; saveCart(); renderCart(); }
+  function setQty(id, qty) { if (qty <= 0) { removeFromCart(id); return; } state.cart[id] = qty; saveCart(); renderCart(); }
 
-  function cartItems(){
+  function cartItems() {
     return Object.entries(state.cart).map(([id, qty]) => {
       const product = products.find(p => p.id === id);
       if (!product) return { id, name: 'Unknown', price: 0, category: 'Misc', qty };
@@ -232,17 +241,17 @@
     });
   }
 
-  function cartTotals(){
+  function cartTotals() {
     const items = cartItems();
     const subtotal = items.reduce((sum, it) => sum + it.price * it.qty, 0);
     return { items, subtotal };
   }
 
-  function renderCart(){
+  function renderCart() {
     const { items, subtotal } = cartTotals();
     cartItemsEl.innerHTML = '';
 
-    if (!items.length){
+    if (!items.length) {
       cartItemsEl.innerHTML = '<p class="muted">Your cart is empty.</p>';
       cartCount.textContent = '0';
       subtotalEl.textContent = '$0.00';
@@ -253,7 +262,9 @@
       const row = document.createElement('div');
       row.className = 'cart-item';
       row.innerHTML = `
-        <div class="thumb"><img src="${it.img}" alt="${it.name}" style="width:56px;height:56px;object-fit:cover;border-radius:8px;"></div>
+        <div class="thumb">
+          <img src="${it.img}" alt="${it.name}" style="width:56px;height:56px;object-fit:cover;border-radius:8px;">
+        </div>
         <div>
           <h4 class="item-title">${it.name}</h4>
           <div class="item-meta">${it.category} • ${formatCurrency(it.price)}</div>
@@ -274,39 +285,37 @@
       cartItemsEl.appendChild(row);
     });
 
-    cartCount.textContent = Object.values(state.cart).reduce((a,b)=>a+b,0);
+    cartCount.textContent = Object.values(state.cart).reduce((a, b) => a + b, 0);
     subtotalEl.textContent = formatCurrency(subtotal);
   }
 
   // ===== CART DRAWER =====
-  function openCart(){
+  function openCart() {
     cartDrawer.classList.add('open');
-    cartDrawer.setAttribute('aria-hidden','false');
+    cartDrawer.setAttribute('aria-hidden', 'false');
   }
-  function closeCart(){
+  function closeCart() {
     cartDrawer.classList.remove('open');
-    cartDrawer.setAttribute('aria-hidden','true');
+    cartDrawer.setAttribute('aria-hidden', 'true');
     document.activeElement?.blur();
   }
 
- function handleCheckout() {
-  const { items, subtotal } = cartTotals();
-  if (!items.length) {
-    alert('Your cart is empty.');
-    return;
+  // ===== CHECKOUT =====
+  function handleCheckout() {
+    const { items, subtotal } = cartTotals();
+    if (!items.length) {
+      alert('Your cart is empty.');
+      return;
+    }
+    localStorage.setItem('kestalux_checkout_total', subtotal);
+    window.location.href = 'creditcard.html';
   }
 
-  // Save subtotal to localStorage (so creditcard.html can access it)
-  localStorage.setItem('kestalux_checkout_total', subtotal);
+  // ===== UTILITIES =====
+  function formatCurrency(n) {
+    return n.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
+  }
 
-  // Redirect to the payment page
-  window.location.href = 'creditcard.html';
-}
-
-
-  // ===== UTILS =====
-  function formatCurrency(n){ return n.toLocaleString(undefined,{style:'currency',currency:'USD'}); }
-  function hexWithAlpha(hex,a){ const v=hex.replace('#',''); const r=parseInt(v.slice(0,2),16), g=parseInt(v.slice(2,4),16), b=parseInt(v.slice(4,6),16); return `rgba(${r},${g},${b},${a})`; }
-
+  // ===== START APP =====
   document.addEventListener('DOMContentLoaded', init);
 })();
