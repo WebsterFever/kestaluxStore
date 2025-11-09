@@ -1561,3 +1561,6 @@ button.remove:hover {
     display: none !important;
   }
 }
+.logo {
+  filter: brightness(0.85) saturate(1.3);
+}
