@@ -276,7 +276,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: space-between;
   padding: 12px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line) ;
 }
 .cart-items {
   padding: 60px 12px;
@@ -1712,8 +1712,44 @@ button.remove:hover {
     width: 70px;
   }
 
+
+
   .brand-name {
     font-size: 20px;
     letter-spacing: 0.5px;
   }
+}
+
+.logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  padding: 6px;
+  background: linear-gradient(135deg, #e9f7e9, #d8ead9);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.06);
+  background: linear-gradient(135deg, #b8d8b5, #e4f2e3);
+}
+.logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px; /* soft design */
+  background: #e9f7e9; /* light mint tone behind logo */
+  padding: 6px;
+  border: 1.5px solid #c6d9c6; /* delicate, high-end border */
+  box-shadow: 0 4px 10px rgba(47, 122, 68, 0.08); /* soft green tint shadow */
+  filter: brightness(1.15) saturate(1.1); /* 🌿 makes green a bit lighter */
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.25) saturate(1.2);
+  box-shadow: 0 6px 16px rgba(47, 122, 68, 0.18);
 }
