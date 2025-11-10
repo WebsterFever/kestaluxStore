@@ -10,46 +10,79 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* ===== POLICY MODAL (Safe minimal style) ===== */
+    .policy-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.6);
+      z-index: 9999;
+    }
+    .policy-modal.active {
+      display: flex;
+    }
+    .policy-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeIn .25s ease;
+    }
+    .close-policy {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
+  </style>
 </head>
 
 <body>
   <!-- Header -->
   <header class="site-header">
-  <div class="container header-inner">
-    <!-- Logo + brand -->
-    <a class="brand" href="#" aria-label="Kestalux Home">
-      <img src="assets/logo.png" alt="Kestalux logo" class="logo" />
-      <span class="brand-name">Kestalux</span>
-    </a>
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="Kestalux Home">
+        <img src="assets/logo.png" alt="Kestalux logo" class="logo" />
+        <span class="brand-name">Kestalux</span>
+      </a>
 
-    <!-- Navigation -->
-    <nav class="nav" id="navMenu">
-      <a href="#hero">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+      <nav class="nav" id="navMenu">
+        <a href="#hero">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <!-- Search + Cart + Menu for mobile -->
-    <div class="header-actions">
-      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
-      <button id="searchIcon" class="search-toggle" aria-label="Search">🔍</button>
-      <button id="cartButton" class="cart-button" aria-label="Open cart">
-        🧺<span id="cartCount" class="cart-count">0</span>
-      </button>
+      <div class="header-actions">
+        <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <button id="searchIcon" class="search-toggle" aria-label="Search">🔍</button>
+        <button id="cartButton" class="cart-button" aria-label="Open cart">
+          🧺<span id="cartCount" class="cart-count">0</span>
+        </button>
+      </div>
+
+      <div class="search-area" id="searchArea">
+        <input id="searchInput" type="search" placeholder="Search products…" aria-label="Search products"/>
+      </div>
     </div>
-
-    <!-- Search bar (hidden by default) -->
-    <div class="search-area" id="searchArea">
-      <input id="searchInput" type="search" placeholder="Search products…" aria-label="Search products"/>
-    </div>
-  </div>
-</header>
+  </header>
 
   <!-- Hero -->
   <section id="hero" class="hero">
     <img src="assets/kestaluxBanner.png" alt="Exclusive Kestalux — Keep Yourself Beautiful" class="hero-img"/>
-   
     <div class="hero-overlay">
       <a href="#shop" class="btn btn-primary">Shop Now</a>
     </div>
@@ -89,11 +122,8 @@
     <section id="productGrid" class="product-grid" aria-live="polite"></section>
   </section>
 
-  
-
   <!-- Cart Drawer -->
   <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" aria-labelledby="cartTitle" role="dialog">
-    <!-- ✅ Added tabindex for accessibility -->
     <div class="cart-panel" tabindex="-1">
       <header class="cart-header">
         <h2 id="cartTitle">Your Cart</h2>
@@ -147,77 +177,198 @@
   </template>
 
   <!-- Footer -->
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- Contact Section -->
-    <div id="contact" class="footer-column">
-      <h4>CONTACT</h4>
-      <p>Email: <a href="mailto:hello@kestalux.com">hello@kestalux.com</a></p>
-      <p>Customer Service: Mon–Fri, 9AM–6PM</p>
-      <button class="footer-btn">CONTACT US</button>
-    </div>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Contact Section -->
+      <div id="contact" class="footer-column">
+        <h4>CONTACT</h4>
+        <p>Email: <a href="mailto:hello@kestalux.com">hello@kestalux.com</a></p>
+        <p>Customer Service: Mon–Fri, 9AM–6PM</p>
+        <button class="footer-btn">CONTACT US</button>
+      </div>
 
-    <!-- About Section -->
-    <div id="about" class="footer-column">
-      <h4>ABOUT</h4>
-      <p>Clean, cruelty-free beauty crafted to enhance your natural glow.</p>
-      <button class="footer-btn">LEARN MORE</button>
-    </div>
+      <!-- About Section -->
+      <div id="about" class="footer-column">
+        <h4>ABOUT</h4>
+        <p>Clean, cruelty-free beauty crafted to enhance your natural glow.</p>
+        <button class="footer-btn">LEARN MORE</button>
+      </div>
 
-    <!-- Company Section -->
-    <div class="footer-column">
-      <h4>COMPANY</h4>
-      <a href="#">Cookie Policy</a>
-      <a href="#">Terms & Conditions</a>
-      <a href="#">Privacy Policy</a>
-    </div>
+      <!-- Company Section -->
+      <div class="footer-column">
+        <h4>COMPANY</h4>
+        <a href="#" id="cookiePolicy">Cookie Policy</a>
+        <a href="#" id="termsPolicy">Terms & Conditions</a>
+        <a href="#" id="privacyPolicy">Privacy Policy</a>
+        <a href="#" id="shippingPolicy">Shipping Policy</a>
+        <a href="#" id="returnPolicy">Return Policy</a>
+        <a href="#" id="exchangePolicy">Exchange Policy</a>
+        <a href="#" id="cancellationPolicy">Cancellation Policy</a>
+      </div>
 
-    <!-- Help Section -->
-    <div class="footer-column">
-      <h4>HELP & INFORMATION</h4>
-      <a href="#">Help Center</a>
-      <a href="#">Ordering & Payment</a>
-      <a href="#">Shipping</a>
-      <a href="#">Returns</a>
-      <a href="#">Contact Us</a>
-    </div>
+      <!-- Help Section -->
+      <div class="footer-column">
+        <h4>HELP & INFORMATION</h4>
+        <a href="#">Help Center</a>
+        <a href="#">Ordering & Payment</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact Us</a>
+      </div>
 
-    <!-- Brand Section -->
-    <div class="footer-column">
-      <h4>KESTALUX</h4>
-      <a href="#">Journal</a>
-      <a href="#">Careers</a>
-      <div class="social-icons">
-        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
-        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook"></a>
+      <!-- Brand Section -->
+      <div class="footer-column">
+        <h4>KESTALUX</h4>
+        <a href="#">Journal</a>
+        <a href="#">Careers</a>
+        <div class="social-icons">
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook"></a>
+        </div>
       </div>
     </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Kestalux Cosmetics — All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Shared Policy Modal -->
+  <div id="policyModal" class="policy-modal">
+    <div class="policy-content">
+      <button id="closePolicy" class="close-policy">&times;</button>
+      <h2 id="policyTitle"></h2>
+      <p id="policyText"></p>
+    </div>
   </div>
 
-  <div class="footer-bottom">
-    <p>© <span id="year"></span> Kestalux Cosmetics — All Rights Reserved</p>
-  </div>
-</footer>
-
-
-
-  <!-- ✅ Load the App script AFTER DOM is ready -->
+  <!-- Scripts -->
   <script src="app.js"></script>
   <script>
-  const menuToggle = document.getElementById("menuToggle");
-  const navMenu = document.getElementById("navMenu");
-  const searchIcon = document.getElementById("searchIcon");
-  const searchArea = document.getElementById("searchArea");
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+    const searchIcon = document.getElementById("searchIcon");
+    const searchArea = document.getElementById("searchArea");
 
-  menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-  });
+    menuToggle.addEventListener("click", () => navMenu.classList.toggle("active"));
+    searchIcon.addEventListener("click", () => searchArea.classList.toggle("active"));
 
-  searchIcon.addEventListener("click", () => {
-    searchArea.classList.toggle("active");
-  });
-</script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById("policyModal");
+      const title = document.getElementById("policyTitle");
+      const text = document.getElementById("policyText");
+      const close = document.getElementById("closePolicy");
+
+      const policies = {
+  cookiePolicy: {
+    title: "Cookie Policy",
+    text: `
+      We use cookies and similar technologies to enhance your browsing experience, analyze traffic patterns, and understand how visitors interact with our website. Cookies help us remember your preferences, such as language settings or items left in your shopping cart, ensuring a seamless and personalized experience each time you visit.
+
+      Some cookies are essential for the operation of our site, while others allow us to gather anonymous analytics to improve functionality and performance. Third-party cookies may also be used for advertising or to measure the effectiveness of our marketing campaigns. These partners are required to handle your information responsibly.
+
+      You have full control over cookie settings in your browser and can disable or delete them at any time. Please note that disabling certain cookies may affect how the website functions or limit access to specific features. For example, checkout or login may not operate correctly if essential cookies are blocked.
+
+      By continuing to use our website, you consent to our use of cookies in accordance with this policy. We may update this Cookie Policy from time to time to reflect changes in technology or legal requirements, so please review it periodically for the latest information.
+    `
+  },
+
+  termsPolicy: {
+    title: "Terms & Conditions",
+    text: `
+      By accessing or purchasing from Kestalux Cosmetics, you agree to be bound by the terms and conditions set forth on this page. These terms apply to all users of the site, including browsers, customers, merchants, and contributors of content. Please read them carefully before using our services.
+
+      All products are intended for personal use only and may not be resold without written permission. Prices, descriptions, and availability are subject to change without notice. We reserve the right to refuse service, terminate accounts, or cancel orders at our sole discretion if fraudulent or unauthorized activity is suspected.
+
+      You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. Kestalux Cosmetics is not liable for damages arising from misuse of the website, loss of data, or interruptions in service, except as required by law.
+
+      These Terms & Conditions may be updated periodically to reflect business or regulatory changes. Continued use of our website constitutes acceptance of any revised terms. For questions regarding these terms, please contact our customer service team.
+    `
+  },
+
+  privacyPolicy: {
+    title: "Privacy Policy",
+    text: `
+      Your privacy is a top priority for Kestalux Cosmetics. We collect personal information such as your name, email address, shipping address, and payment details solely for the purpose of processing orders and improving your shopping experience. We never sell or rent your information to third parties.
+
+      We may use anonymized data to understand consumer preferences and to enhance our marketing strategies. Information is stored securely using modern encryption and security practices to prevent unauthorized access, alteration, or disclosure.
+
+      You have the right to access, correct, or delete your personal data at any time by contacting us directly. We comply with global data protection laws, including GDPR, and respect your right to privacy, transparency, and data portability.
+
+      This policy may be revised periodically as our business evolves or in response to legal changes. We encourage you to review this page occasionally to stay informed about how we protect your information.
+    `
+  },
+
+  shippingPolicy: {
+    title: "Shipping Policy",
+    text: `
+      We aim to process and ship all orders within 1–3 business days after payment confirmation. Shipping times vary depending on your location and the selected shipping method. Once shipped, you will receive a tracking number via email so you can monitor your order’s journey.
+
+      Domestic orders are typically delivered within 3–7 business days, while international orders may take up to 2–4 weeks depending on customs and regional postal services. Please ensure your shipping address is correct at checkout to avoid delays or returned packages.
+
+      Kestalux Cosmetics is not responsible for delays caused by external factors such as weather conditions, customs inspections, or carrier issues. However, we will assist you in tracking and resolving any shipping concerns whenever possible.
+
+      If your order has not arrived within the estimated timeframe, please contact our support team with your order number, and we will work to locate or replace the shipment promptly.
+    `
+  },
+
+  returnPolicy: {
+    title: "Return Policy",
+    text: `
+      We want you to love every Kestalux product you purchase. If you’re not satisfied, unopened and unused items may be returned within 14 days of delivery for a full refund or store credit. To initiate a return, please contact our support team to obtain a return authorization.
+
+      Returned products must be in their original packaging and accompanied by proof of purchase. Once your return is received and inspected, we will notify you via email and issue a refund to your original payment method, minus any applicable shipping costs.
+
+      Items that show signs of use, damage, or tampering may not qualify for a refund. We reserve the right to deny returns that do not meet our quality and hygiene standards.
+
+      Please allow 5–10 business days for refunds to process after we receive your returned items. Your satisfaction is our priority, and we’ll do our best to make every return experience easy and transparent.
+    `
+  },
+
+  exchangePolicy: {
+    title: "Exchange Policy",
+    text: `
+      We accept exchanges for defective, damaged, or incorrectly shipped items. If you receive a product that doesn’t meet expectations due to manufacturing issues, please contact us within 7 days of receipt to request an exchange authorization.
+
+      To qualify, the product must be unused and in its original packaging. Our team may request photos to verify the issue before approving the exchange. Once approved, we will provide instructions for returning the item and promptly send a replacement at no additional cost.
+
+      Exchanges are processed within 3–5 business days after we receive your returned item. If the requested replacement is unavailable, a full refund or store credit will be offered instead.
+
+      We are committed to delivering high-quality beauty products and stand behind every purchase. Your satisfaction is important to us, and we’ll ensure a fair and efficient resolution to any product concerns.
+    `
+  },
+
+  cancellationPolicy: {
+    title: "Cancellation Policy",
+    text: `
+      We understand that plans can change. Orders may be cancelled within 24 hours of placement for a full refund. To cancel, please contact our customer service team immediately with your order details. Once your order has been processed or shipped, cancellations may no longer be possible.
+
+      If the order has already shipped, you may still return it following our Return Policy after it arrives. Please note that shipping costs are non-refundable once the package has left our facility.
+
+      Kestalux Cosmetics reserves the right to cancel or refuse orders at our discretion due to suspected fraud, payment issues, or inventory errors. In such cases, customers will be notified promptly and fully refunded.
+
+      We encourage you to double-check your items and address before finalizing your order. Clear communication ensures we can process your purchase smoothly and deliver an exceptional experience every time.
+    `
+  }
+};
 
 
+      Object.keys(policies).forEach(id => {
+        const link = document.getElementById(id);
+        if (!link) return;
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const p = policies[id];
+          title.textContent = p.title;
+          text.textContent = p.text;
+          modal.classList.add("active");
+        });
+      });
+
+      close.addEventListener("click", () => modal.classList.remove("active"));
+      modal.addEventListener("click", e => {
+        if (e.target === modal) modal.classList.remove("active");
+      });
+    });
+  </script>
 </body>
 </html>

@@ -3,88 +3,89 @@
   const $$ = (sel, el = document) => Array.from(el.querySelectorAll(sel));
 
   // ===== PRODUCTS =====
-  const products = [
-    {
-      id: 'f1',
-      name: 'Radiance Face Cream',
-      price: 28.80,
-      category: 'Foundation',
-      skin: 'Dry',
-      popularity: 120,
-      desc: 'Hydrating medium coverage with dewy finish.',
-      img: 'https://i.ibb.co/nNfwTDmt/Chat-GPT-Image-Nov-9-2025-04-23-15-PM.png' // ✅ Local image
-    },
-    {
-      id: 'l1',
-      name: 'Gentle Foaming Cleanser',
-      price: 16.65,
-      category: 'Lipstick',
-      skin: 'All',
-      popularity: 150,
-      desc: 'Comfort matte that lasts all day.',
-      img: 'https://i.ibb.co/wNrGX3Dn/Chat-GPT-Image-Nov-9-2025-11-59-49-AM.png'
-    },
-    {
-      id: 'e1',
-      name: 'Glow C Serum',
-      price: 24.70,
-      category: 'Eyeshadow',
-      skin: 'All',
-      popularity: 110,
-      desc: '9-pan neutrals with buttery mattes.',
-      img: 'https://i.ibb.co/N63wGMtT/lotion.jpg'
-    },
-    {
-      id: 's1',
-      name: 'Radiance Serum',
-      price: 30.90,
-      category: 'Serum',
-      skin: 'Combination',
-      popularity: 140,
-      desc: 'Vitamin C + E for bright, even skin.',
-      img: 'https://png.pngtree.com/png-clipart/20230511/original/pngtree-3d-skin-care-products-exquisite-care-set-png-image_9157466.png'
-    },
-    {
-      id: 'c1',
-      name: 'Balance Face Cream',
-      price: 22.65,
-      category: 'Face Cream',
-      skin: 'Oily',
-      popularity: 95,
-      desc: 'Lightweight gel-cream controls shine.',
-      img: 'https://static.vecteezy.com/system/resources/previews/048/053/161/non_2x/a-pastel-paradise-of-skincare-products-png.png'
-    },
-    {
-      id: 'f2',
-      name: 'Pure Mineral Foundation',
-      price: 26.70,
-      category: 'Foundation',
-      skin: 'Sensitive',
-      popularity: 85,
-      desc: 'Mineral formula with SPF 20.',
-      img: 'https://png.pngtree.com/png-vector/20241213/ourmid/pngtree-pink-floral-lipstick-packaging-png-image_14723876.png'
-    },
-    {
-      id: 'm1',
-      name: 'Luminous Mist Setting Spray',
-      price: 18.40,
-      category: 'Setting Spray',
-      skin: 'All',
-      popularity: 90,
-      desc: 'Locks in makeup with a radiant, dewy glow that lasts all day.',
-      img: 'https://w7.pngwing.com/pngs/302/877/png-transparent-sk-ii-cream-facial-beauty-sh2-eye-cream-cosmetology-service-people.png'
-    },
-    {
-      id: 'b1',
-      name: 'Rose Bliss Body Lotion',
-      price: 20.80,
-      category: 'Body Care',
-      skin: 'Dry',
-      popularity: 100,
-      desc: 'Nourishing lotion infused with rose oil for silky, hydrated skin.',
-      img: 'https://w7.pngwing.com/pngs/787/10/png-transparent-makeup-brush-cosmetics-eye-liner-eye-shadow-lipstick-miscellaneous-microphone-face-thumbnail.png'
-    }
-  ];
+ const products = [
+  {
+    id: 'f1',
+    name: 'Radiance Face Cream',
+    price: 28.80,
+    category: 'Face Cream',
+    skin: 'Dry',
+    popularity: 120,
+    desc: 'A deeply hydrating face cream infused with hyaluronic acid and botanical oils to restore moisture balance. Leaves skin plump, luminous, and visibly smoother throughout the day.',
+    img: 'https://i.ibb.co/nNfwTDmt/Chat-GPT-Image-Nov-9-2025-04-23-15-PM.png'
+  },
+  {
+    id: 'l1',
+    name: 'Gentle Foaming Cleanser',
+    price: 16.65,
+    category: 'Cleanser',
+    skin: 'All',
+    popularity: 150,
+    desc: 'A soft, pH-balanced foaming cleanser formulated with chamomile and green tea extract to remove impurities without stripping the skin. Perfect for daily use and all skin types.',
+    img: 'https://i.ibb.co/wNrGX3Dn/Chat-GPT-Image-Nov-9-2025-11-59-49-AM.png'
+  },
+  {
+    id: 'e1',
+    name: 'Glow C Serum',
+    price: 24.70,
+    category: 'Serum',
+    skin: 'All',
+    popularity: 110,
+    desc: 'A lightweight Vitamin C serum enriched with niacinamide and plant antioxidants that brighten dull skin, reduce dark spots, and boost overall radiance for a youthful glow.',
+    img: 'https://i.ibb.co/N63wGMtT/lotion.jpg'
+  },
+  {
+    id: 's1',
+    name: 'Radiance Serum',
+    price: 30.90,
+    category: 'Serum',
+    skin: 'Combination',
+    popularity: 140,
+    desc: 'A concentrated blend of Vitamin C + E that revitalizes tired skin, supports collagen production, and helps even tone while leaving a natural, healthy luminosity.',
+    img: 'https://png.pngtree.com/png-clipart/20230511/original/pngtree-3d-skin-care-products-exquisite-care-set-png-image_9157466.png'
+  },
+  {
+    id: 'c1',
+    name: 'Balance Face Cream',
+    price: 22.65,
+    category: 'Face Cream',
+    skin: 'Oily',
+    popularity: 95,
+    desc: 'A refreshing gel-cream that hydrates while regulating excess oil. Formulated with tea tree and witch hazel to refine pores and provide a smooth, matte finish.',
+    img: 'https://static.vecteezy.com/system/resources/previews/048/053/161/non_2x/a-pastel-paradise-of-skincare-products-png.png'
+  },
+  {
+    id: 'f2',
+    name: 'Pure Mineral Foundation',
+    price: 26.70,
+    category: 'Foundation',
+    skin: 'Sensitive',
+    popularity: 85,
+    desc: 'A silky mineral-based foundation with SPF 20 protection. Provides breathable, buildable coverage that evens skin tone while letting your natural glow shine through.',
+    img: 'https://png.pngtree.com/png-vector/20241213/ourmid/pngtree-pink-floral-lipstick-packaging-png-image_14723876.png'
+  },
+  {
+    id: 'm1',
+    name: 'Luminous Mist Setting Spray',
+    price: 18.40,
+    category: 'Setting Spray',
+    skin: 'All',
+    popularity: 90,
+    desc: 'A weightless, hydrating setting mist that locks makeup in place for up to 12 hours. Infused with rosewater and aloe to refresh and revive skin throughout the day.',
+    img: 'https://w7.pngwing.com/pngs/302/877/png-transparent-sk-ii-cream-facial-beauty-sh2-eye-cream-cosmetology-service-people.png'
+  },
+  {
+    id: 'b1',
+    name: 'Rose Bliss Body Lotion',
+    price: 20.80,
+    category: 'Body Care',
+    skin: 'Dry',
+    popularity: 100,
+    desc: 'A luxurious body lotion infused with rose oil and shea butter to deeply nourish dry skin. Absorbs quickly, leaving a soft floral scent and long-lasting silky smoothness.',
+    img: 'https://w7.pngwing.com/pngs/787/10/png-transparent-makeup-brush-cosmetics-eye-liner-eye-shadow-lipstick-miscellaneous-microphone-face-thumbnail.png'
+  }
+];
+
 
   const state = {
     cart: loadCart(),
